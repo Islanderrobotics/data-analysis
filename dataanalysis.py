@@ -9,6 +9,8 @@ class DataAnalysis:
             self.Head()
             self.Info()
             self.Describe()
+            self.isnull()
+            print("that is all I have for you have a good day")
         else:
             raise NotPandasDataFrame(df)
     def Head(self):
@@ -46,3 +48,17 @@ class DataAnalysis:
         choice = input("enter yes to countinue")
         if (choice.upper() == "YES"):
             print(self.df.describe())
+    def isnull(self):
+        choice = input("enter yes to see if your data set has any null values")
+        if (choice.upper() == "YES"):
+            isnull = []
+            for i in self.df.columns:
+                if (self.df[i].isnull().values.any()):
+                    isnull.append(i)
+            if (isnull !=[]):
+                print(f"your data set has {len(isnull)} column with null values, would you like to see the column names\n"
+                      "as well as the amount of null values in that column")
+                columns = input("enter yes if you do")
+                if columns.upper() == "YES":
+                    for i in isnull:
+                        print(f"in column {i}, there are {self.df[i].isnull().sum().sum()} cells with null values")
